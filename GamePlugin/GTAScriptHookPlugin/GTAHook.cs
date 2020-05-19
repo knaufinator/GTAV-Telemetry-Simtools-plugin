@@ -26,10 +26,9 @@ namespace GTAHook
 			if (Game.Player.Character.IsSittingInVehicle())
 			{
 				//this algorithm, based on the players changing position in the world, apply those changing accellerations to the appropriate side of the player based on the way they are facing.
-				Vector3 position = new Vector3(Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z);
-
+	
 				Vector3 vector;
-				linearAcceleration.LinearAccelerationSample(out vector, position, 25);//increase samples from 25 if too rough.... increase latency, if its to slow... reduce...
+				linearAcceleration.LinearAccelerationSample(out vector, Game.Player.Character.Position, 25);//increase samples from 25 if too rough.... increase latency, if its to slow... reduce...
 				
 		
 				double Surge_Output = (double)vector.X * (double)Game.Player.Character.ForwardVector.X + (double)vector.Y * (double)Game.Player.Character.ForwardVector.Y;

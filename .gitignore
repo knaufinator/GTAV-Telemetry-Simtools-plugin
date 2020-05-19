@@ -18,3 +18,6 @@ GamePlugin/GTAScriptHookPlugin/obj/Debug/DesignTimeResolveAssemblyReferencesInpu
 GamePlugin/GTAScriptHookPlugin/obj/Debug/GTAScriptHookPlugin.csproj.FileListAbsolute.txt
 GamePlugin/GTAScriptHookPlugin/obj/Debug/GTAScriptHookPlugin.dll
 GamePlugin/GTAScriptHookPlugin/obj/Debug/GTAScriptHookPlugin.pdb
+GamePlugin/GTAScriptHookPlugin/bin/Debug/GTAScriptHookPlugin.dll
+GamePlugin/GTAScriptHookPlugin/bin/Debug/GTAScriptHookPlugin.pdb
+*.cache
