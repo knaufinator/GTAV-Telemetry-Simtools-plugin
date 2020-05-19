@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandTheftAutoV_GamePlugin", "GamePlugin\GrandTheftAutoV_GamePlugin.csproj", "{2869A823-1BCB-4823-A0A6-DBEA25C932E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAScriptHookPlugin", "GTAScriptHookPlugin\GTAScriptHookPlugin.csproj", "{BBDD9A37-25D5-453D-B1AC-DAF24F105679}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2869A823-1BCB-4823-A0A6-DBEA25C932E2}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{2869A823-1BCB-4823-A0A6-DBEA25C932E2}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{2869A823-1BCB-4823-A0A6-DBEA25C932E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2869A823-1BCB-4823-A0A6-DBEA25C932E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBDD9A37-25D5-453D-B1AC-DAF24F105679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBDD9A37-25D5-453D-B1AC-DAF24F105679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBDD9A37-25D5-453D-B1AC-DAF24F105679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDD9A37-25D5-453D-B1AC-DAF24F105679}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8DC11681-44C2-4EED-B3DD-25C5790AFA15}
+	EndGlobalSection
+EndGlobal
