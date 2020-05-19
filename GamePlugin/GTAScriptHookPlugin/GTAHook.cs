@@ -23,14 +23,14 @@ namespace GTAHook
 
 		void OnTick(object sender, EventArgs e)
 		{
+			string[] toSend = new string[10];
+
 			if (Game.Player.Character.IsSittingInVehicle())
 			{
 				//this algorithm, based on the players changing position in the world, apply those changing accellerations to the appropriate side of the player based on the way they are facing.
-	
 				Vector3 vector;
 				linearAcceleration.LinearAccelerationSample(out vector, Game.Player.Character.Position, 25);//increase samples from 25 if too rough.... increase latency, if its to slow... reduce...
 				
-		
 				double Surge_Output = (double)vector.X * (double)Game.Player.Character.ForwardVector.X + (double)vector.Y * (double)Game.Player.Character.ForwardVector.Y;
 				double Sway_Output = (double)vector.X * (double)Game.Player.Character.RightVector.X + (double)vector.Y * (double)Game.Player.Character.RightVector.Y + (double)vector.Z * (double)Game.Player.Character.RightVector.Z;
 				double Heave_Output = (double)vector.X * (double)Game.Player.Character.UpVector.X + (double)vector.Y * (double)Game.Player.Character.UpVector.Y + (double)vector.Z * (double)Game.Player.Character.UpVector.Z;
@@ -38,7 +38,6 @@ namespace GTAHook
 				Vector3 twistyVector;
 				linearRotationalAcceleration.LinearAccelerationSample(out twistyVector, Game.Player.Character.Rotation, 25);
 
-				string[] toSend = new string[10];
 				toSend[0] = Surge_Output.ToString("n14");
 				toSend[1] = Sway_Output.ToString("n14");
 				toSend[2] = Heave_Output.ToString("n14");
@@ -51,14 +50,9 @@ namespace GTAHook
 				toSend[7] = twistyVector.Y.ToString("n14");
 				toSend[8] = twistyVector.Z.ToString("n14");
 
-				string toSendString = getSendString(toSend);
-
-				byte[] data = Encoding.UTF8.GetBytes(toSendString);
-				udpClient.Send(data, data.Length);
 			}
 			else
 			{
-				string[] toSend = new string[10];
 				toSend[0] = "0";
 				toSend[1] = "0";
 				toSend[2] = "0";
@@ -68,13 +62,12 @@ namespace GTAHook
 				toSend[6] = "0";
 				toSend[7] = "0";
 				toSend[8] = "0";
-
-				string toSendString = getSendString(toSend);
-
-				byte[] data = Encoding.UTF8.GetBytes(toSendString);
-				udpClient.Send(data, data.Length);
-		
 			}
+
+			string toSendString = getSendString(toSend);
+
+			byte[] data = Encoding.UTF8.GetBytes(toSendString);
+			udpClient.Send(data, data.Length);
 		}
 
 		private string getSendString(string[] toSend)
