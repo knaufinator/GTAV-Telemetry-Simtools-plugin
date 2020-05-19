@@ -18,7 +18,7 @@ pitch,roll,yaw,surge,sway,heave - rotationAccelerationX,rotationAccelerationY,ro
 - 4) Copy  GrandTheftAutoV_GamePlugin.dll into the simtools plugin directory... i have not bothered checking if it installs using normal methods...reopen simtools, and it should appear in the list. patch as normal...
 C:\Users\userName\AppData\Local\SimTools\GamePlugins
 
-- 5) Open gtav, telemetry is triggered when game protaginist enters vehicle... it should work with the jets as well... and .. boats .. and sub,.... but i have not tried yet. Scripthookdotnet has a log file if there are issue it may show up in it inside the GTAV directory.
+- 5) Open gtav, telemetry is triggered when game protagonist enters vehicle... it should work with the jets as well... and .. boats .. and sub,.... but i have not tried yet. Scripthookdotnet has a log file if there are issue it may show up in it inside the GTAV directory.
 
 
 note,... you will need to set up min max limits using the tuner, they will default to 0's 
