@@ -31,13 +31,10 @@ namespace GTAHook
 				Vector3 vector;
 				linearAcceleration.LinearAccelerationSample(out vector, position, 25);//increase samples from 25 if too rough.... increase latency, if its to slow... reduce...
 				
-				Vector3 vector3_1 = new Vector3(Game.Player.Character.ForwardVector.X, Game.Player.Character.ForwardVector.Y, Game.Player.Character.ForwardVector.Z);
-				Vector3 vector3_2 = new Vector3(Game.Player.Character.RightVector.X, Game.Player.Character.RightVector.Y, Game.Player.Character.RightVector.Z);
-				Vector3 vector3_3 = new Vector3(Game.Player.Character.UpVector.X, Game.Player.Character.UpVector.Y, Game.Player.Character.UpVector.Z);
-
-				double Surge_Output = (double)vector.X * (double)vector3_1.X + (double)vector.Y * (double)vector3_1.Y;
-				double Sway_Output = (double)vector.X * (double)vector3_2.X + (double)vector.Y * (double)vector3_2.Y + (double)vector.Z * (double)vector3_2.Z;
-				double Heave_Output = (double)vector.X * (double)vector3_3.X + (double)vector.Y * (double)vector3_3.Y + (double)vector.Z * (double)vector3_3.Z;
+		
+				double Surge_Output = (double)vector.X * (double)Game.Player.Character.ForwardVector.X + (double)vector.Y * (double)Game.Player.Character.ForwardVector.Y;
+				double Sway_Output = (double)vector.X * (double)Game.Player.Character.RightVector.X + (double)vector.Y * (double)Game.Player.Character.RightVector.Y + (double)vector.Z * (double)Game.Player.Character.RightVector.Z;
+				double Heave_Output = (double)vector.X * (double)Game.Player.Character.UpVector.X + (double)vector.Y * (double)Game.Player.Character.UpVector.Y + (double)vector.Z * (double)Game.Player.Character.UpVector.Z;
 
 				Vector3 twistyVector;
 				linearRotationalAcceleration.LinearAccelerationSample(out twistyVector, Game.Player.Character.Rotation, 25);
