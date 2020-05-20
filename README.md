@@ -17,8 +17,8 @@ This does not yet set any Dash or vibe components, i will focus on that once I g
 - 3) Copy GTAScriptHookPlugin.dll into the "scripts" folder (create it..) within your GTAV directory
 	"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\scripts"
 
-- 4) Copy  GrandTheftAutoV_GamePlugin.dll into the simtools plugin directory... i have not bothered checking if it installs using normal methods...reopen simtools, and it should appear in the list. patch as normal...
-C:\Users\userName\AppData\Local\SimTools\GamePlugins
+- 4) install  GrandTheftAutoV_GamePlugin.dll using the simtools installer
+I have in the past just dropped it into the simtools plugin directory...and it work, but some users report otherwise...fyi the plugin directory is.. C:\Users\userName\AppData\Local\SimTools\GamePlugins if needed
 
 - 5) Open gtav, telemetry is triggered when game protagonist enters vehicle... it should work with the jets as well... and .. boats .. and sub,.... but i have not tried yet. Scripthookdotnet has a log file if there are issue it may show up in it inside the GTAV directory.
 
