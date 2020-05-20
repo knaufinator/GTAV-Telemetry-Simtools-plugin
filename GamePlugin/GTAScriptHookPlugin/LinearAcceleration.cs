@@ -14,10 +14,12 @@ namespace GTAHook
 		public float TimeOld;
 		public float DeltaTime;
 		private AccurateTimer mTimer1;
+		private int samples;
 
-		public LinearAcceleration()
+		public LinearAcceleration(int samples)
 		{
 			this.mTimer1 = new AccurateTimer(new Action(this.TimerTick1), 1);
+			this.samples = samples;
 		}
 
 		private void TimerTick1()
@@ -25,7 +27,7 @@ namespace GTAHook
 			++this.time;
 		}
 
-		public bool LinearAccelerationSample(out Vector3 vector, Vector3 position, int samples)
+		public bool LinearAccelerationSample(out Vector3 vector, Vector3 position)
 		{
 			this.DeltaTime = (float)this.time - this.TimeOld;
 			this.TimeOld = (float)this.time;

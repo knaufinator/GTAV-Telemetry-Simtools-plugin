@@ -10,8 +10,15 @@ namespace GTAHook
 	public class Main : Script
 	{
 		UdpClient udpClient;
-		LinearAcceleration linearAcceleration = new LinearAcceleration();
-		LinearAcceleration linearRotationalAcceleration = new LinearAcceleration();
+		//LinearAcceleration linearAcceleration = new LinearAcceleration(25);
+		//LinearAcceleration linearRotationalAcceleration = new LinearAcceleration(25);
+
+		//LinearAcceleration linearAcceleration2 = new LinearAcceleration(25);
+		//LinearAcceleration linearRotationalAcceleration2 = new LinearAcceleration(25);
+
+		LinearAccelerationFromVelocity linearAcceleration = new LinearAccelerationFromVelocity(25);
+		LinearAccelerationFromVelocity linearRotationalAcceleration = new LinearAccelerationFromVelocity(25);
+
 
 		public Main()
 		{
@@ -23,33 +30,30 @@ namespace GTAHook
 
 		void OnTick(object sender, EventArgs e)
 		{
-			string[] toSend = new string[10];
+			string[] toSend = new string[30];
 
 			if (Game.Player.Character.IsSittingInVehicle())
-			{
-				//this algorithm, based on the players changing position in the world, apply those changing accellerations to the appropriate side of the player based on the way they are facing.
-				Vector3 vector;
-				linearAcceleration.LinearAccelerationSample(out vector, Game.Player.Character.Position, 25);//increase samples from 25 if too rough.... increase latency, if its to slow... reduce...
-				
-				double Surge_Output = (double)vector.X * (double)Game.Player.Character.ForwardVector.X + (double)vector.Y * (double)Game.Player.Character.ForwardVector.Y;
-				double Sway_Output = (double)vector.X * (double)Game.Player.Character.RightVector.X + (double)vector.Y * (double)Game.Player.Character.RightVector.Y + (double)vector.Z * (double)Game.Player.Character.RightVector.Z;
-				double Heave_Output = (double)vector.X * (double)Game.Player.Character.UpVector.X + (double)vector.Y * (double)Game.Player.Character.UpVector.Y + (double)vector.Z * (double)Game.Player.Character.UpVector.Z;
+			{			
+				Vector3 vector = linearAcceleration.LinearAccelerationSample(Game.Player.LastVehicle.Velocity);
 
-				Vector3 twistyVector;
-				linearRotationalAcceleration.LinearAccelerationSample(out twistyVector, Game.Player.Character.Rotation, 25);
+				double Surge_Output = (double)vector.X * (double)Game.Player.LastVehicle.ForwardVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.ForwardVector.Y;
+				double Sway_Output = (double)vector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)vector.Z * (double)Game.Player.LastVehicle.RightVector.Z;
+				double Heave_Output = (double)vector.X * (double)Game.Player.LastVehicle.UpVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.UpVector.Y + (double)vector.Z * (double)Game.Player.LastVehicle.UpVector.Z;
 
 				toSend[0] = Surge_Output.ToString("n14");
 				toSend[1] = Sway_Output.ToString("n14");
 				toSend[2] = Heave_Output.ToString("n14");
 
-				toSend[3] = Game.Player.Character.Rotation.X.ToString("n14");
-				toSend[4] = Game.Player.Character.Rotation.Y.ToString("n14");
-				toSend[5] = Game.Player.Character.Rotation.Z.ToString("n14");
-				
+				toSend[3] = Game.Player.LastVehicle.Rotation.X.ToString("n14");
+				toSend[4] = Game.Player.LastVehicle.Rotation.Y.ToString("n14");
+				toSend[5] = Game.Player.LastVehicle.Rotation.Z.ToString("n14");
+
+
+				Vector3 twistyVector = linearRotationalAcceleration.LinearAccelerationSample(Game.Player.LastVehicle.RotationVelocity);
+
 				toSend[6] = twistyVector.X.ToString("n14");
 				toSend[7] = twistyVector.Y.ToString("n14");
 				toSend[8] = twistyVector.Z.ToString("n14");
-
 			}
 			else
 			{
