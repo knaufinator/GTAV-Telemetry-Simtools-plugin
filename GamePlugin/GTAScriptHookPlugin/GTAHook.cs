@@ -10,15 +10,9 @@ namespace GTAHook
 	public class Main : Script
 	{
 		UdpClient udpClient;
-		//LinearAcceleration linearAcceleration = new LinearAcceleration(25);
-		//LinearAcceleration linearRotationalAcceleration = new LinearAcceleration(25);
-
-		//LinearAcceleration linearAcceleration2 = new LinearAcceleration(25);
-		//LinearAcceleration linearRotationalAcceleration2 = new LinearAcceleration(25);
 
 		LinearAccelerationFromVelocity linearAcceleration = new LinearAccelerationFromVelocity(25);
 		LinearAccelerationFromVelocity linearRotationalAcceleration = new LinearAccelerationFromVelocity(25);
-
 
 		public Main()
 		{
