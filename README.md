@@ -20,7 +20,7 @@ This does not yet set any Dash or vibe components, i will focus on that once I g
 - 4) install  GrandTheftAutoV_GamePlugin.dll using the simtools installer
 I have in the past just dropped it into the simtools plugin directory...and it work, but some users report otherwise...fyi the plugin directory is.. C:\Users\userName\AppData\Local\SimTools\GamePlugins if needed
 
-- 5) Open gtav, telemetry is triggered when game protagonist enters vehicle... it should work with the jets as well... and .. boats .. and sub,.... but i have not tried yet. Scripthookdotnet has a log file if there are issue it may show up in it inside the GTAV directory.
+- 5) Open gtav, telemetry is triggered when game protagonist enters vehicle... it should work with the jets as well... and .. boats .. and sub.
 
 
 note,... you will need to set up min max limits using the tuner, they will default to 0's 
