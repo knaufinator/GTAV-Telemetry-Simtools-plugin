@@ -33,12 +33,14 @@ namespace GTAHook
 			string[] toSend = new string[30];
 
 			if (Game.Player.Character.IsSittingInVehicle())
-			{			
-				Vector3 vector = linearAcceleration.LinearAccelerationSample(Game.Player.LastVehicle.Velocity);
+			{
 
-				double Surge_Output = (double)vector.X * (double)Game.Player.LastVehicle.ForwardVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.ForwardVector.Y;
-				double Sway_Output = (double)vector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)vector.Z * (double)Game.Player.LastVehicle.RightVector.Z;
-				double Heave_Output = (double)vector.X * (double)Game.Player.LastVehicle.UpVector.X + (double)vector.Y * (double)Game.Player.LastVehicle.UpVector.Y + (double)vector.Z * (double)Game.Player.LastVehicle.UpVector.Z;
+				Vector3 velocityVector = Game.Player.LastVehicle.Velocity;
+				Vector3 accelVector = linearAcceleration.LinearAccelerationSample(velocityVector);
+
+				double Surge_Output = (double)accelVector.X * (double)Game.Player.LastVehicle.ForwardVector.X + (double)accelVector.Y * (double)Game.Player.LastVehicle.ForwardVector.Y;
+				double Sway_Output = (double)accelVector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)accelVector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)accelVector.Z * (double)Game.Player.LastVehicle.RightVector.Z;
+				double Heave_Output = (double)accelVector.X * (double)Game.Player.LastVehicle.UpVector.X + (double)accelVector.Y * (double)Game.Player.LastVehicle.UpVector.Y + (double)accelVector.Z * (double)Game.Player.LastVehicle.UpVector.Z;
 
 				toSend[0] = Surge_Output.ToString("n14");
 				toSend[1] = Sway_Output.ToString("n14");
@@ -48,12 +50,25 @@ namespace GTAHook
 				toSend[4] = Game.Player.LastVehicle.Rotation.Y.ToString("n14");
 				toSend[5] = Game.Player.LastVehicle.Rotation.Z.ToString("n14");
 
-
 				Vector3 twistyVector = linearRotationalAcceleration.LinearAccelerationSample(Game.Player.LastVehicle.RotationVelocity);
+
+				double tracLoss = -((double)velocityVector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)velocityVector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)velocityVector.Z * (double)Game.Player.LastVehicle.RightVector.Z);
 
 				toSend[6] = twistyVector.X.ToString("n14");
 				toSend[7] = twistyVector.Y.ToString("n14");
-				toSend[8] = twistyVector.Z.ToString("n14");
+				toSend[8] = tracLoss.ToString("n14");
+
+				//dash vibe stuff, possible traction loss items
+				toSend[9] = Game.Player.LastVehicle.CurrentRPM.ToString("n14");
+				toSend[10] = Game.Player.LastVehicle.CurrentGear.ToString("n14");
+				toSend[11] = Game.Player.LastVehicle.Speed.ToString("n14");
+
+				toSend[14] = Game.Player.LastVehicle.SteeringAngle.ToString("n14");
+				toSend[15] = Game.Player.LastVehicle.WheelSpeed.ToString("n14");
+				toSend[16] = Game.Player.LastVehicle.MaxTraction.ToString("n14");
+				toSend[17] = Game.Player.LastVehicle.ThrottlePower.ToString("n14");
+				toSend[18] = Game.Player.LastVehicle.Throttle.ToString("n14");
+
 			}
 			else
 			{
@@ -66,6 +81,12 @@ namespace GTAHook
 				toSend[6] = "0";
 				toSend[7] = "0";
 				toSend[8] = "0";
+				toSend[9] = "0";
+				toSend[10] = "0";
+				toSend[11] = "0";
+				toSend[12] = "0";
+				toSend[13] = "0";
+
 			}
 
 			string toSendString = getSendString(toSend);
@@ -74,6 +95,7 @@ namespace GTAHook
 			udpClient.Send(data, data.Length);
 		}
 
+	
 		private string getSendString(string[] toSend)
 		{
 			string toSendString = "S:";

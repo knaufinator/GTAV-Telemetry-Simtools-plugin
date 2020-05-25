@@ -40,7 +40,6 @@ namespace GrandTheftAutoV_GamePlugin
         private string Vibe_8_Output = "";
         private string Vibe_9_Output = "";
      
-
         private const string _gameName = "GrandTheftAutoV";
         private const string _processName = "GTA5";
         private const string _pluginAuthorsName = "christopher knauf";
@@ -50,15 +49,10 @@ namespace GrandTheftAutoV_GamePlugin
         private const bool _requiresSecondCheck = false;
         private const bool _enable_DashBoard = true;
         private const bool _enable_GameVibe = true;
-        private const bool _DOF_Support_Roll = true;
-        private const bool _DOF_Support_Pitch = true;
-        private const bool _DOF_Support_Heave = true;
-        private const bool _DOF_Support_Yaw = true;
-        private const bool _DOF_Support_Sway = true;
-        private const bool _DOF_Support_Surge = true;
+  
         private const string _DOF_Support_Extra1 = "RotxAccel";
         private const string _DOF_Support_Extra2 = "RotyAccel";
-        private const string _DOF_Support_Extra3 = "RotzAccel";
+        private const string _DOF_Support_Extra3 = "Traction Loss";
      
         private const bool _enable_MemoryHook = false;
         private const bool _enable_MemoryMap = false;
@@ -154,9 +148,25 @@ namespace GrandTheftAutoV_GamePlugin
                     this.Roll_Output = Double.Parse(strlist[5]);
                     this.Yaw_Output = Double.Parse(strlist[6]);
 
-                    this.Extra1_Output = Double.Parse(strlist[7]);
-                    this.Extra2_Output = Double.Parse(strlist[8]);
-                    this.Extra3_Output = Double.Parse(strlist[9]);
+                    this.Extra1_Output = Double.Parse(strlist[7]);//rxX
+                    this.Extra2_Output = Double.Parse(strlist[8]);//rxY
+                    this.Extra3_Output = Double.Parse(strlist[9]);//trac
+
+                    // Dash,vice stuff
+                    int speed = (int)double.Parse(strlist[12]);
+                    int gear = (int)double.Parse(strlist[11]);
+                    int rpm = (int)double.Parse(strlist[10]);
+
+                    Dash_1_Output = "Speed," + speed.ToString();
+                    Dash_2_Output = "Gear," + gear.ToString();
+                    Dash_3_Output = "RPM," + rpm.ToString();
+
+                    Vibe_1_Output = "RPM," + rpm.ToString();
+                    Vibe_2_Output = "Gear Shift," + gear.ToString();
+                    Vibe_3_Output = "Collision L/R," + Sway_Output.ToString();
+                    Vibe_4_Output = "Collision F/B," + Surge_Output.ToString();
+                    Vibe_5_Output = "Road Detail," + Heave_Output.ToString();
+                    Vibe_7_Output = "Turbulence," + speed.ToString();
                 }
             }
             catch (Exception)
@@ -334,7 +344,7 @@ namespace GrandTheftAutoV_GamePlugin
         {
             get
             {
-                return _requiresPatchingPath;
+                return _requiresSecondCheck;
             }
         }
 
@@ -347,6 +357,7 @@ namespace GrandTheftAutoV_GamePlugin
         {
             return true.ToString() + "," + true.ToString() + "," + true.ToString() + "," + true.ToString() + "," + true.ToString() + "," + true.ToString() + "," + _DOF_Support_Extra1 + "," + _DOF_Support_Extra2 + "," + _DOF_Support_Extra3;
         }
+
 
         public string Get_Dash1_Output()
         {
