@@ -52,7 +52,7 @@ namespace GTAHook
 				toSend[7] = twistyVector.Y.ToString("n14");
 				toSend[8] = tracLoss.ToString("n14");
 
-				//dash vibe stuff, possible traction loss items
+				//dash vibe stuff
 				toSend[9] = Game.Player.LastVehicle.CurrentRPM.ToString("n14");
 				toSend[10] = Game.Player.LastVehicle.CurrentGear.ToString("n14");
 				toSend[11] = Game.Player.LastVehicle.Speed.ToString("n14");
