@@ -2,9 +2,9 @@
 GTAV scripthookvdotnet script/telemetry server and Simtools plugin for motion simulator
 
 # Plugin provides
-pitch,roll,yaw,surge,sway,heave - rotationAccelerationX,rotationAccelerationY,rotationAccelerationZ
+pitch,roll,yaw,surge,sway,heave - rotationAccelerationX,rotationAccelerationY,tractionLoss (extra_1,extra_2,extra_3)
 
-This does not yet set any Dash or vibe components, i will focus on that once I get some more seat time in and actually test what I have done.
+Basic dash and vibe support
 
 # Source code included
 - GTAScriptHookPlugin - Scripthookvdotnet script, this acts as a server of the telemetry data, it is relayed over UDP... often...
