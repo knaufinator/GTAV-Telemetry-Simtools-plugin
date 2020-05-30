@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccurateTimer.cs" />
+    <Compile Include="FilterVelocity.cs" />
     <Compile Include="GTAHook.cs" />
     <Compile Include="LinearAccelerationFromVelocity.cs" />
     <Compile Include="LinearAcceleration.cs" />

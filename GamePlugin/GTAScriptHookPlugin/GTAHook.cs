@@ -10,7 +10,7 @@ namespace GTAHook
 	public class Main : Script
 	{
 		UdpClient udpClient;
-
+		FilterVelocity filterVelocity = new FilterVelocity(25);
 		LinearAccelerationFromVelocity linearAcceleration = new LinearAccelerationFromVelocity(25);
 		LinearAccelerationFromVelocity linearRotationalAcceleration = new LinearAccelerationFromVelocity(25);
 
@@ -30,6 +30,8 @@ namespace GTAHook
 			{
 
 				Vector3 velocityVector = Game.Player.LastVehicle.Velocity;
+
+				Vector3 filteredVelocityVector = filterVelocity.Sample(Game.Player.LastVehicle.Velocity);
 				Vector3 accelVector = linearAcceleration.LinearAccelerationSample(velocityVector);
 
 				double Surge_Output = (double)accelVector.X * (double)Game.Player.LastVehicle.ForwardVector.X + (double)accelVector.Y * (double)Game.Player.LastVehicle.ForwardVector.Y;
@@ -46,13 +48,13 @@ namespace GTAHook
 
 				Vector3 twistyVector = linearRotationalAcceleration.LinearAccelerationSample(Game.Player.LastVehicle.RotationVelocity);
 
-				double tracLoss = -((double)velocityVector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)velocityVector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)velocityVector.Z * (double)Game.Player.LastVehicle.RightVector.Z);
+				double tracLoss = -((double)filteredVelocityVector.X * (double)Game.Player.LastVehicle.RightVector.X + (double)filteredVelocityVector.Y * (double)Game.Player.LastVehicle.RightVector.Y + (double)filteredVelocityVector.Z * (double)Game.Player.LastVehicle.RightVector.Z);
 
 				toSend[6] = twistyVector.X.ToString("n14");
 				toSend[7] = twistyVector.Y.ToString("n14");
 				toSend[8] = tracLoss.ToString("n14");
 
-				//dash vibe stuff, possible traction loss items
+				//dash vibe stuff
 				toSend[9] = Game.Player.LastVehicle.CurrentRPM.ToString("n14");
 				toSend[10] = Game.Player.LastVehicle.CurrentGear.ToString("n14");
 				toSend[11] = Game.Player.LastVehicle.Speed.ToString("n14");
@@ -89,7 +91,6 @@ namespace GTAHook
 			udpClient.Send(data, data.Length);
 		}
 
-	
 		private string getSendString(string[] toSend)
 		{
 			string toSendString = "S:";
